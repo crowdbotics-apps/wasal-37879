@@ -1,3 +1,4 @@
+import { StyleSheet } from "react-native";
 import React, { useState } from "react";
 import { View, Text, KeyboardAvoidingView, TouchableOpacity, TextInput, ActivityIndicator, Alert, Platform } from "react-native";
 import { AppleButton, appleAuthAndroid } from "@invertase/react-native-apple-authentication";
@@ -26,11 +27,7 @@ export const Button = props => <TouchableOpacity onPress={props.onPress} disable
   </TouchableOpacity>; // Grouped Social Buttons View
 
 const SocialButtonsView = props => <View>
-    <Text style={{
-    textAlign: "center",
-    width: "100%",
-    marginVertical: 5
-  }}>
+    <Text style={_styles.xntAggId}>
       - or -
     </Text>
     <Button title="Signin with Facebook" viewStyle={{
@@ -41,19 +38,8 @@ const SocialButtonsView = props => <View>
   }} textStyle={{
     color: Color.white
   }} loading={props.loading} onPress={props.onFacebookConnect} />
-    <GoogleSigninButton onPress={props.onGoogleConnect} size={GoogleSigninButton.Size.Wide} color={GoogleSigninButton.Color.Dark} disabled={props.loading} style={{
-    width: "99%",
-    height: 48,
-    marginHorizontal: 2
-  }} />
-    {(Platform.OS === "ios" || appleAuthAndroid.isSupported) && <AppleButton onPress={props.onAppleConnect} buttonStyle={AppleButton.Style.WHITE_OUTLINE} buttonType={AppleButton.Type.SIGN_IN} style={{
-    width: "97%",
-    // You must specify a width
-    height: 44,
-    // You must specify a height
-    marginHorizontal: 5,
-    marginTop: 2
-  }} />}
+    <GoogleSigninButton onPress={props.onGoogleConnect} size={GoogleSigninButton.Size.Wide} color={GoogleSigninButton.Color.Dark} disabled={props.loading} style={_styles.kytqIlSj} />
+    {(Platform.OS === "ios" || appleAuthAndroid.isSupported) && <AppleButton onPress={props.onAppleConnect} buttonStyle={AppleButton.Style.WHITE_OUTLINE} buttonType={AppleButton.Type.SIGN_IN} style={_styles.BnwHaYEc} />}
   </View>;
 
 const onFacebookConnect = async (dispatch, navigation) => {
@@ -168,10 +154,7 @@ export const SignupTab = ({
   };
 
   return <KeyboardAvoidingView>
-      <View style={{
-      marginVertical: 10,
-      marginHorizontal: 15
-    }}>
+      <View style={_styles.RmkAtlie}>
         <TextInputField keyboardType="email-address" label="Email address" placeholder="Email address" onChangeText={value => setEmail(value)} value={email} error={validationError.email} />
         <TextInputField label="Password" placeholder="Password" secureTextEntry={true} onChangeText={value => setPassword(value)} value={password} error={validationError.password} />
         <TextInputField label="Confirm Password" placeholder="Confirm Password" secureTextEntry={true} onChangeText={value => setConfirmPassword(value)} value={confirmPassword} />
@@ -219,10 +202,7 @@ export const SignInTab = ({
   };
 
   return <KeyboardAvoidingView>
-      <View style={{
-      marginVertical: 10,
-      marginHorizontal: 15
-    }}>
+      <View style={_styles.KEBmDqNl}>
         <TextInputField keyboardType="email-address" label="Email address" placeholder="Email address" onChangeText={value => setEmail(value)} value={email} error={validationError.email} />
         <TextInputField label="Password" placeholder="Password" secureTextEntry={true} onChangeText={value => setPassword(value)} value={password} error={validationError.password} />
       </View>
@@ -230,11 +210,7 @@ export const SignInTab = ({
       <Button title="Login" loading={api.loading === "pending"} onPress={onSigninPress} />
 
       {!!api.error && <Text style={textInputStyles.error}>{api.error.message}</Text>}
-      <View style={{
-      justifyContent: "center",
-      alignItems: "center",
-      marginTop: 10
-    }}>
+      <View style={_styles.ETTbHTOf}>
         <TouchableOpacity activeOpacity={0.7} onPress={() => {
         navigation.navigate("PasswordReset");
       }}>
@@ -244,3 +220,35 @@ export const SignInTab = ({
       <SocialButtonsView loading={api.loading === "pending"} onFacebookConnect={() => onFacebookConnect(dispatch)} onGoogleConnect={() => onGoogleConnect(dispatch)} onAppleConnect={() => onAppleConnect(dispatch)} />
     </KeyboardAvoidingView>;
 };
+
+const _styles = StyleSheet.create({
+  xntAggId: {
+    textAlign: "center",
+    width: "100%",
+    marginVertical: 5
+  },
+  kytqIlSj: {
+    width: "99%",
+    height: 48,
+    marginHorizontal: 2
+  },
+  BnwHaYEc: {
+    width: "97%",
+    height: 44,
+    marginHorizontal: 5,
+    marginTop: 2
+  },
+  RmkAtlie: {
+    marginVertical: 10,
+    marginHorizontal: 15
+  },
+  KEBmDqNl: {
+    marginVertical: 10,
+    marginHorizontal: 15
+  },
+  ETTbHTOf: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 10
+  }
+});
